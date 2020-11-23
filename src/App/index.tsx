@@ -4,14 +4,11 @@
  *
  */
 import 'react-native-gesture-handler';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectAppState, makeSelectLoading, makeSelectError} from './selectors';
 import { fetchCryptoAction } from './actions';
-import {  Props } from './constants';
-
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   StatusBar,
 } from 'react-native';
@@ -23,14 +20,7 @@ import { SCREENS } from '../common/constant';
 
 const Stack = createStackNavigator();
 
-export const App = (props: Props) => {
-
-  const { fetchCryptoAStart} = props;
-
-  // useEffect(() => {
-  //   fetchCryptoAStart({payload: {}, metadata: {timePeriod: '24h', limit: 10, sort: 'coinranking', pageNumber: 0}});
-  // }, []);
-
+export const App = () => {
 
   return (
     <NavigationContainer >
@@ -46,26 +36,18 @@ export const App = (props: Props) => {
         <Stack.Screen
           name={SCREENS.DETAILS}
           component={Details}
-          // options={{
-          //   headerShown: false,
-          // }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-App.propTypes = {
-  // AppStart: PropTypes.func,
-};
-
 export const mapStateToProps = () => {
-  // @dev you can pass props to makeSelectFuncs(props) like so.
   return createStructuredSelector({
     app: makeSelectAppState(),
     loading: makeSelectLoading(),
     error: makeSelectError(),
-});
+  });
 };
 
 export const mapDispatchToProps = {

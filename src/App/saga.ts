@@ -1,4 +1,4 @@
-import * as Effects from "redux-saga/effects";
+import * as Effects from 'redux-saga/effects';
 
 const call: any = Effects.call;
 const takeLatest: any = Effects.takeLatest;

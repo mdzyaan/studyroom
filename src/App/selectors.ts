@@ -11,7 +11,6 @@ interface IntitialState {
   error: boolean,
 }
 
-
 interface Crypto {
   crypto: {
     stats: any,
@@ -45,4 +44,4 @@ const makeSelectCrypto = () =>
     (subState: Crypto) => subState.crypto,
   );
 
-export { makeSelectAppState, makeSelectLoading, makeSelectError,makeSelectCrypto };
+export { makeSelectAppState, makeSelectLoading, makeSelectError, makeSelectCrypto };
