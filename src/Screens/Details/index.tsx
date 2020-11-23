@@ -149,7 +149,7 @@ export const Details = (props: Props) => {
             } else {
               Alert.alert(`Don't know how to open this URL: ${link.url}`);
             }
-          }
+          };
           return (
             <Button
               text={buttonText}
