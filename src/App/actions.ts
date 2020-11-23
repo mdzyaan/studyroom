@@ -13,7 +13,7 @@ import {
   FETCH_CRYPTO_50_ERROR,
   ActionObject,
   ActionArr,
-  Crypto50Arr } from './constants';
+  CryptoArr } from './constants';
 
 export const AppAction: ActionObject = {
   start: (data: ActionArr) => {
@@ -39,8 +39,8 @@ export const AppAction: ActionObject = {
   },
 };
 
-export const fetchCrypto50Action: ActionObject = {
-  start: (data: Crypto50Arr) => {
+export const fetchCryptoAction: ActionObject = {
+  start: (data: CryptoArr) => {
     console.log("action start")
     return {
       type: FETCH_CRYPTO_50_START,

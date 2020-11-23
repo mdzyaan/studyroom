@@ -47,10 +47,8 @@ export const mapStateToProps = () => {
 });
 };
 
-export const mapDispatchToProps = () => {
-  return {
-    {{ properCase name }}Start: (data: ActionArr) => {{ properCase name }}Action.start(data),
+export const mapDispatchToProps =  {
+    {{ properCase name }}Start: {{ properCase name }}Action.start,
   };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }});

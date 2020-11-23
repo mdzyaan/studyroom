@@ -8,10 +8,10 @@ import 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectAppState, makeSelectLoading, makeSelectError} from './selectors';
-import { fetchCrypto50Action } from './actions';
+import { fetchCryptoAction } from './actions';
 import {  Props } from './constants';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StatusBar,
 } from 'react-native';
@@ -23,14 +23,15 @@ import { SCREENS } from '../common/constant';
 
 const Stack = createStackNavigator();
 
-export const App: React.FC<Props> = (props) => {
+export const App = (props: Props) => {
 
-  const { fetchCrypto50AStart} = props;
+  const { fetchCryptoAStart} = props;
 
-  React.useEffect(() => {
-    fetchCrypto50AStart({payload: {}, metadata: {timePeriod: '24h', limit: 100, sort: 'coinranking'}});
-    console.log("fetch crypto 50")
-  }, []);
+  // useEffect(() => {
+  //   fetchCryptoAStart({payload: {}, metadata: {timePeriod: '24h', limit: 10, sort: 'coinranking', pageNumber: 0}});
+  // }, []);
+
+
   return (
     <NavigationContainer >
       <StatusBar />
@@ -68,7 +69,7 @@ export const mapStateToProps = () => {
 };
 
 export const mapDispatchToProps = {
-    fetchCrypto50AStart: fetchCrypto50Action.start,
+    fetchCryptoAStart: fetchCryptoAction.start,
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
+import PropTypes from 'prop-types';
 import selectedTheme from '../../styles/theme';
 
 const styles = StyleSheet.create({
@@ -62,6 +62,13 @@ export const CoinCard = (props: Props) => {
             <Text style={styles.coinPrice}>${parseFloat(price).toFixed(2)}</Text>
         </TouchableOpacity>
     );
+};
+
+CoinCard.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  symbol: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
 };
 
 export default CoinCard;

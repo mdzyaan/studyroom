@@ -1,10 +1,6 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-/**
- * Direct selector to the {{ camelCase name }} state domain
- */
-
 interface State {
   {{ camelCase name }}: object,
   loading: boolean,
@@ -14,10 +10,6 @@ interface State {
 const select{{ properCase name }}Domain = (state: any) => state.{{ camelCase name }} || initialState;
 
 const makeSelect{{ properCase name }}State = () => createSelector( select{{ properCase name }}Domain, (subState: State) => subState);
-
-/**
- * Other specific selectors
- */
 
 const makeSelectLoading = () =>
   createSelector(

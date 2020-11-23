@@ -15,10 +15,6 @@ const selectDetailsDomain = (state: any) => state.details || initialState;
 
 const makeSelectDetailsState = () => createSelector( selectDetailsDomain, (subState: State) => subState);
 
-/**
- * Other specific selectors
- */
-
 const makeSelectLoading = () =>
   createSelector(
     selectDetailsDomain,

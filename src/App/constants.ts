@@ -29,13 +29,13 @@ export interface ActionObject {
   error: (data: ActionArr) => Action,
 }
 
-export interface Crypto50 {
+export interface Crypto {
   payload: object,
   metadata: any,
 }
 
-export type Crypto50Arr = Crypto50 | ActionArr;
+export type CryptoArr = Crypto | ActionArr;
 
 export interface Props {
-  fetchCrypto50AStart: (data: Crypto50Arr) => Action
+  fetchCryptoAStart: (data: CryptoArr) => Action
 }

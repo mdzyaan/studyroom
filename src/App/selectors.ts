@@ -12,18 +12,16 @@ interface IntitialState {
 }
 
 
-interface Crypto50 {
-  crypto50: {
+interface Crypto {
+  crypto: {
     stats: any,
-    coin: [],
+    coin: any,
   }
 }
 
-type State = IntitialState | Crypto50;
-
 const selectAppDomain = (state: any) => state.app || initialState;
 
-const makeSelectAppState = () => createSelector( selectAppDomain, (subState: State) => subState);
+const makeSelectAppState = () => createSelector( selectAppDomain, (subState: IntitialState) => subState);
 
 /**
  * Other specific selectors
@@ -41,10 +39,10 @@ const makeSelectError = () =>
     (subState: IntitialState) => subState.error,
   );
 
-const makeSelectCrypto50 = () =>
+const makeSelectCrypto = () =>
   createSelector(
     selectAppDomain,
-    (subState: Crypto50) => subState.crypto50,
+    (subState: Crypto) => subState.crypto,
   );
 
-export { makeSelectAppState, makeSelectLoading, makeSelectError,makeSelectCrypto50 };
+export { makeSelectAppState, makeSelectLoading, makeSelectError,makeSelectCrypto };

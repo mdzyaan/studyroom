@@ -1,8 +1,6 @@
-// Imports: Dependencies
-import { delay, takeEvery, takeLatest, put } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 
-import { {{ upperCase name }}_START, {{ upperCase name }}_SUCCESS, {{ upperCase name }}_ERROR } from './constants';
-import { {{ properCase name }}Action } from './actions';
+import { {{ upperCase name }}_START } from './constants';
 
 function* fetch{{ camelCase name }}Data() {
     try {
@@ -11,7 +9,6 @@ function* fetch{{ camelCase name }}Data() {
         console.log(error);
     }
 }
-// Watcher: Increase Counter Async
 export function* {{ camelCase name }}Saga() {
     // Take Last Action Only
     yield takeLatest({{ upperCase name }}_START, fetch{{ camelCase name }}Data);

@@ -3,8 +3,7 @@
  * Home
  *
  */
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectHomeState, makeSelectLoading, makeSelectError} from './selectors';
@@ -12,9 +11,11 @@ import { HomeAction } from './actions';
 import { ActionArr } from './constants';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as globalSelectors from '../../App/selectors';
+import * as globalActions from '../../App/actions';
 import CoinCard from '../../Components/CoinCard';
 import selectedTheme from '../../styles/theme';
 import { SCREENS } from '../../common/constant';
+import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
 
 const styles = StyleSheet.create({
   homeContainer: {
@@ -45,27 +46,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 12,
     marginRight: 12,
-    // justifyContent: 'space-around',
   },
   statValueContainer: {
     width: '50%',
   },
   coinListContainer: {
     padding: 16,
+    paddingTop: 0,
   },
   coinCard: {
     borderRadius: 10,
     backgroundColor: selectedTheme.color.primaryColor,
   },
+  loadingText: {
+    fontSize: selectedTheme.fontSize.three,
+    color: selectedTheme.color.black,
+    marginBottom: 12,
+  },
 });
-
+let limit = 10;
 interface Props {
-  crypto50: any,
-  navigation: any
+  crypto: any,
+  navigation: any,
+  fetchCryptoAStart: any,
 }
 export const Home = (props: Props) => {
 
-  const { crypto50 } = props;
+  const { crypto, fetchCryptoAStart } = props;
+
+  const [pageNumber, setPageNumber ] = useState(0);
+
+  let fetchCoins = () => {
+    fetchCryptoAStart({payload: {}, metadata: {timePeriod: '24h', limit, sort: 'coinranking', pageNumber}});
+    setPageNumber(pageNumber + limit);
+  };
+
   return (
     <ScrollView style={styles.homeContainer}>
       <Text style={styles.SectionHeader}>
@@ -74,18 +89,18 @@ export const Home = (props: Props) => {
       <View style={styles.flex}>
         <View style={styles.statValueContainer}>
           <Text style={styles.secondary}>Market Cap</Text>
-          <Text style={styles.statValue}>${crypto50.stats.totalMarketCap.toString().substr(0, 3)}B</Text>
+          <Text style={styles.statValue}>${crypto.stats.totalMarketCap.toString().substr(0, 3)}B</Text>
         </View>
         <View>
           <Text style={styles.secondary}>24h Volume</Text>
-          <Text style={styles.statValue}>${crypto50.stats.total24hVolume.toString().substr(0, 3)}B</Text>
+          <Text style={styles.statValue}>${crypto.stats.total24hVolume.toString().substr(0, 3)}B</Text>
         </View>
       </View>
       <Text style={styles.SectionHeader}>
-        Top 50 Coins
+        Coins
       </Text>
       <View style={styles.coinListContainer}>
-        {crypto50.coins.map((coin: any, coinId: number) => {
+        {crypto.coins.map((coin: any, coinId: number) => {
 
           return (
             <CoinCard {...coin} key={coinId} onPress={() => {
@@ -95,13 +110,12 @@ export const Home = (props: Props) => {
             }}/>
           );
         })}
+        <VisibilitySensor onChange={fetchCoins}>
+          <Text style={styles.loadingText}>Loading...</Text>
+        </VisibilitySensor>
       </View>
     </ScrollView>
   );
-};
-
-Home.propTypes = {
-  // HomeStart: PropTypes.func.isRequired,
 };
 
 export const mapStateToProps = () => {
@@ -110,14 +124,13 @@ export const mapStateToProps = () => {
     home: makeSelectHomeState(),
     loading: makeSelectLoading(),
     error: makeSelectError(),
-    crypto50: globalSelectors.makeSelectCrypto50(),
+    crypto: globalSelectors.makeSelectCrypto(),
 });
 };
 
-export const mapDispatchToProps = () => {
-  return {
+export const mapDispatchToProps =  {
     HomeStart: (data: ActionArr) => HomeAction.start(data),
+    fetchCryptoAStart: globalActions.fetchCryptoAction.start,
   };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

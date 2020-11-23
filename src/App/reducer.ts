@@ -18,7 +18,7 @@ export const initialState = {
   loading: false,
   error: false,
   data: {},
-  crypto50: {
+  crypto: {
     loading: false,
     error: false,
     stats: {
@@ -47,19 +47,19 @@ const appReducer  = (state = initialState, action: Action) => {
         draft.error = action.payload;
         break;
       case FETCH_CRYPTO_50_START:
-        draft.crypto50.loading = true;
-        draft.crypto50.error = false;
+        draft.crypto.loading = true;
+        draft.crypto.error = false;
         break;
 
       case FETCH_CRYPTO_50_SUCCESS:
-        draft.crypto50.loading = false;
-        draft.crypto50.error = false;
-        draft.crypto50.stats = action.payload.stats;
-        draft.crypto50.coins = action.payload.coins;
+        draft.crypto.loading = false;
+        draft.crypto.error = false;
+        draft.crypto.stats = action.payload.stats;
+        draft.crypto.coins = action.payload.coins;
         break;
       case FETCH_CRYPTO_50_ERROR:
-        draft.crypto50.loading = false;
-        draft.crypto50.error = action.payload;
+        draft.crypto.loading = false;
+        draft.crypto.error = action.payload;
         break;
       default:
         break;
