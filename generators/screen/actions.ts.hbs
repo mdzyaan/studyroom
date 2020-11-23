@@ -1,0 +1,31 @@
+/*
+ *
+ * {{ properCase name }} actions
+ *
+ */
+
+import { {{ upperCase name }}_START, {{ upperCase name }}_SUCCESS, {{ upperCase name }}_ERROR, ActionObject, ActionArr } from './constants';
+
+export const {{ properCase name }}Action: ActionObject = {
+  start: (data: ActionArr) => {
+    return {
+      type: {{ upperCase name }}_START,
+      payload : data.payload,
+      metadata: data.metadata,
+    };
+  },
+  success: (data: ActionArr) => {
+    return {
+      type: {{ upperCase name }}_SUCCESS,
+      payload : data.payload,
+      metadata: data.metadata,
+    };
+  },
+  error: (data: ActionArr) => {
+    return {
+      type: {{ upperCase name }}_ERROR,
+      payload : data.payload,
+      metadata: data.metadata,
+    };
+  },
+};

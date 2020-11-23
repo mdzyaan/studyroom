@@ -1,0 +1,26 @@
+/*
+ *
+ * {{ properCase name }} constants
+ *
+ */
+
+export const {{ upperCase name }}_START: string = `{{ upperCase name }}_START`;
+export const {{ upperCase name }}_SUCCESS: string = `{{ upperCase name }}_SUCCESS`;
+export const {{ upperCase name }}_ERROR: string = `{{ upperCase name }}_ERROR`;
+
+export interface Action {
+    type: string,
+    payload: any,
+    metadata: any,
+  }
+
+export interface ActionArr {
+    payload: object,
+    metadata: object,
+}
+
+export interface ActionObject {
+  start: (data: ActionArr) => Action,
+  success: (data: ActionArr) => Action,
+  error: (data: ActionArr) => Action,
+}
