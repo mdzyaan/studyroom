@@ -41,7 +41,6 @@ export const AppAction: ActionObject = {
 
 export const fetchCryptoAction: ActionObject = {
   start: (data: CryptoArr) => {
-    console.log("action start")
     return {
       type: FETCH_CRYPTO_50_START,
       payload : data.payload,
